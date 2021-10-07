@@ -25,4 +25,9 @@ class UserService
         ]);
     }
 
+    public function deleteUser($id)
+    {
+        return  User::where('id', $id)->delete();
+    }
+
 }

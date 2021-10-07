@@ -10,6 +10,13 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    private $userService;
+
+    public function __construct(UserService $userService){
+        $this->userService = $userService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,9 +35,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request, UserService $userService)
+    public function store(CreateUserRequest $request)
     {
-        $userService->createUser($request);
+        $this->userService->createUser($request);
 
         return redirect()->back()->with('status', 'User Created Successfully!');
     }
@@ -55,9 +62,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id, UserService $userService)
+    public function update(UpdateUserRequest $request, $id)
     {
-        $userService->updateUser($id,$request);
+        $this->userService->updateUser($id,$request);
 
         return redirect()->route('user.index')->with('status', 'User Updated Successfully!');
     }
@@ -70,7 +77,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::where('id', $id)->delete();
+        $this->userService->deleteUser($id);
 
         return redirect()->back()->with('status', 'User Deleted Successfully!');
     }
