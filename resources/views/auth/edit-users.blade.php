@@ -2,8 +2,8 @@
 @section('title', 'CRUD Functionalities')
 
 @section('content')
-    <div class="auth_vh mt-5">
-        <div class="auth_height d-flex align-items-center justify-content-center">
+    <div class="mt-5">
+        <div class="d-flex align-items-center justify-content-center">
             <div class="card col-lg-3 shadow">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">

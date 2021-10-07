@@ -11,17 +11,39 @@
                 <div class="card-body">
                     <form method="POST" action="{{ url('user') }}">
                         @csrf
+                        @if (Session::has('status'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ Session::get('status') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}">
+                            @error('name')
+                                <span class="invalid-feedback">
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}">
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}">
+                            @error('email')
+                                <span class="invalid-feedback">
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" id="password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password">
+                            @error('email')
+                                <span class="invalid-feedback">
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="d-grid gap-2 col-12 mx-auto">
                             <button type="submit" class="btn btn-primary">Add User</button>
